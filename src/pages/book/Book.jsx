@@ -1,4 +1,5 @@
 import React from "react";
+import Table from "./Table";
 
 const Book = () => {
   return (
@@ -18,7 +19,7 @@ const Book = () => {
       <div className="flex flex-col my-4 max-w-70 sm:flex-row sm:max-w-full sm:items-center sm:justify-between">
         <div className="flex gap-2 sm:flex-1 sm:max-w-70">
           <select className="flex-2 border rounded-md text-sm sm:text-lg">
-            <option value="book">Book</option>
+            <option value="title">Title</option>
             <option value="author">Author</option>
             <option value="copies">Copies</option>
           </select>
@@ -38,6 +39,8 @@ const Book = () => {
           />
         </div>
       </div>
+
+      <Table />
     </div>
   );
 };
