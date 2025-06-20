@@ -1,5 +1,6 @@
 import React from "react";
 import Table from "./Table";
+import { NavLink, Outlet } from "react-router-dom";
 
 const Book = () => {
   return (
@@ -10,9 +11,12 @@ const Book = () => {
         </div>
 
         <div>
-          <button className="bg-pink-300 rounded-md py-1 px-2 text-sm cursor-pointer hover:bg-pink-200 sm:text-lg">
+          <NavLink
+            to="form"
+            className="bg-pink-300 rounded-md py-1 px-2 text-sm cursor-pointer hover:bg-pink-200 sm:text-lg"
+          >
             Add book
-          </button>
+          </NavLink>
         </div>
       </div>
 

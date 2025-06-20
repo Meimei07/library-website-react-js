@@ -9,7 +9,7 @@ const RootLayout = () => {
       </div>
 
       <ul className="bg-pink-200 h-10 font-semibold flex items-center  gap-4 text-pink-500 px-3 sm:h-13 sm:text-xl sm:gap-6 sm:px-4">
-        <NavLink to="/">Book</NavLink>
+        <NavLink to="book">Book</NavLink>
         <NavLink to="visitor">Visitor</NavLink>
         <NavLink to="card">Card</NavLink>
         <NavLink to="statistic">Statistic</NavLink>
