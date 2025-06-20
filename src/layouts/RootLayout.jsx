@@ -14,6 +14,8 @@ const RootLayout = () => {
         <NavLink to="card">Card</NavLink>
         <NavLink to="statistic">Statistic</NavLink>
       </ul>
+
+      <Outlet />
     </div>
   );
 };
