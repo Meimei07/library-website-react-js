@@ -1,8 +1,10 @@
 import React from "react";
 import Table from "./Table";
-import { NavLink, Outlet } from "react-router-dom";
+import { NavLink, useOutletContext } from "react-router-dom";
 
 const Book = () => {
+  const { books } = useOutletContext();
+
   return (
     <div className="px-2 sm:px-5">
       <div className="flex py-3">
@@ -44,7 +46,7 @@ const Book = () => {
         </div>
       </div>
 
-      <Table />
+      <Table books={books} />
     </div>
   );
 };

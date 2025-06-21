@@ -1,6 +1,6 @@
 import React from "react";
 
-const Table = () => {
+const Table = ({ books }) => {
   return (
     <div className="overflow-x-auto mt-4">
       <table className="min-w-full text-md">
@@ -18,18 +18,24 @@ const Table = () => {
         </thead>
 
         <tbody>
-          <tr>
-            <td>1</td>
-            <td>The Hobbit</td>
-            <td>J.R.R. Tolkien</td>
-            <td>Jimmie Collon</td>
-            <td>1989</td>
-            <td>129</td>
-            <td>12</td>
-            <td>
-              <button className="text-blue-500 hover:underline">Edit</button>
-            </td>
-          </tr>
+          {books.map((book) => {
+            return (
+              <tr key={book.id}>
+                <td>{book.id}</td>
+                <td>{book.title}</td>
+                <td>{book.author}</td>
+                <td>{book.publisher}</td>
+                <td>{book.publishYear}</td>
+                <td>{book.pages}</td>
+                <td>{book.copies}</td>
+                <td>
+                  <button className="text-blue-500 hover:underline">
+                    Edit
+                  </button>
+                </td>
+              </tr>
+            );
+          })}
         </tbody>
       </table>
     </div>
