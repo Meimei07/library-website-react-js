@@ -1,18 +1,32 @@
 import React from "react";
-import { NavLink } from "react-router-dom";
+import { NavLink, useOutletContext, useNavigate } from "react-router-dom";
 
 const Form = () => {
+  const { handleAddBook } = useOutletContext();
+  const navigate = useNavigate();
+
+  const onSubmit = (event) => {
+    event.preventDefault();
+
+    const formData = new FormData(event.target);
+    const book = Object.fromEntries(formData.entries());
+
+    handleAddBook(book);
+    navigate("/book");
+  };
+
   return (
     <div className="form-container max-w-lg rounded-md shadow-xl">
       <div className="text-xl sm:text-2xl">Book Form</div>
 
-      <form className="max-w-md px-4 sm:px-0">
+      <form onSubmit={onSubmit} className="max-w-md px-4 sm:px-0">
         <label className="text-sm sm:text-md">
           Title*
           <input
             type="text"
             placeholder="Title..."
             className="border py-1 px-1.5 rounded-sm sm:text-lg sm:h-10 sm:px-3"
+            name="title"
             required
           />
         </label>
@@ -23,6 +37,7 @@ const Form = () => {
             type="text"
             placeholder="Author..."
             className="border py-1 px-1.5 rounded-sm sm:text-lg sm:h-10 sm:px-3"
+            name="author"
             required
           />
         </label>
@@ -33,6 +48,7 @@ const Form = () => {
             type="text"
             placeholder="Publisher..."
             className="border py-1 px-1.5 rounded-sm sm:text-lg sm:h-10 sm:px-3"
+            name="publisher"
             required
           />
         </label>
@@ -43,6 +59,7 @@ const Form = () => {
             type="text"
             placeholder="Publish Year..."
             className="border py-1 px-1.5 rounded-sm sm:text-lg sm:h-10 sm:px-3"
+            name="publishYear"
             required
           />
         </label>
@@ -53,6 +70,7 @@ const Form = () => {
             type="text"
             placeholder="Pages..."
             className="border py-1 px-1.5 rounded-sm sm:text-lg sm:h-10 sm:px-3"
+            name="pages"
             required
           />
         </label>
@@ -63,6 +81,7 @@ const Form = () => {
             type="text"
             placeholder="Copies..."
             className="border py-1 px-1.5 rounded-sm sm:text-lg sm:h-10 sm:px-3"
+            name="copies"
             required
           />
         </label>

@@ -1,6 +1,29 @@
+import { useState } from "react";
 import { NavLink, Outlet } from "react-router-dom";
 
 const RootLayout = () => {
+  const initBooks = [
+    {
+      id: 1,
+      title: "Descandent of the Sun",
+      author: "Kim SangIll",
+      publisher: "Jo IlSung",
+      publishYear: "2016",
+      pages: "16",
+      copies: 1,
+    },
+  ];
+
+  const [books, setBooks] = useState(initBooks);
+
+  function handleAddBook(book) {
+    book.copies = parseInt(book.copies);
+    book.id = Math.floor(Math.random() * 10001);
+
+    setBooks([...books, book]);
+    console.log(book);
+  }
+
   return (
     <div className="root-layout">
       <div className="text-pink-300 font-semibold tracking-widest text-3xl pl-3 mb-3 sm:text-4xl`">
@@ -15,7 +38,7 @@ const RootLayout = () => {
         <NavLink to="statistic">Statistic</NavLink>
       </ul>
 
-      <Outlet />
+      <Outlet context={{ handleAddBook, books }} />
     </div>
   );
 };
