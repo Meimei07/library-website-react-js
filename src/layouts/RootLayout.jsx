@@ -15,10 +15,13 @@ const RootLayout = () => {
   ];
 
   const [books, setBooks] = useState(initBooks);
+  const [displayBooks, setDisplayBooks] = useState(books);
   const [editBook, setEditBook] = useState(null);
+  const [selectValue, setSelectValue] = useState("title");
 
   useEffect(() => {
     localStorage.setItem("books", JSON.stringify(books));
+    setDisplayBooks(books);
   }, [books]);
 
   function handleAddBook(book) {
@@ -50,6 +53,26 @@ const RootLayout = () => {
     console.log("update");
   }
 
+  function handleSortBook() {
+    let sortedBooks = [...displayBooks];
+
+    switch (selectValue) {
+      case "title":
+        sortedBooks.sort((a, b) => a.title.localeCompare(b.title));
+        break;
+      case "author":
+        sortedBooks.sort((a, b) => a.author.localeCompare(b.author));
+        break;
+      case "copies":
+        sortedBooks.sort((a, b) => a.copies - b.copies);
+        break;
+      default:
+        break;
+    }
+
+    setDisplayBooks(sortedBooks);
+  }
+
   return (
     <div className="root-layout">
       <div className="text-pink-300 font-semibold tracking-widest text-3xl pl-3 mb-3 sm:text-4xl`">
@@ -66,13 +89,16 @@ const RootLayout = () => {
 
       <Outlet
         context={{
-          books,
+          displayBooks,
           handleAddBook,
           onEdit,
           editBook,
           setEditBook,
           handleEditBook,
           handleDeleteBook,
+          handleSortBook,
+          selectValue,
+          setSelectValue,
         }}
       />
     </div>

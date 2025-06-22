@@ -3,7 +3,14 @@ import Table from "./Table";
 import { Link, useOutletContext } from "react-router-dom";
 
 const Book = () => {
-  const { books, onEdit, handleDeleteBook } = useOutletContext();
+  const {
+    displayBooks,
+    onEdit,
+    handleDeleteBook,
+    handleSortBook,
+    selectValue,
+    setSelectValue,
+  } = useOutletContext();
 
   return (
     <div className="px-2 sm:px-5">
@@ -24,14 +31,21 @@ const Book = () => {
 
       <div className="flex flex-col my-4 max-w-70 sm:flex-row sm:max-w-full sm:items-center sm:justify-between">
         <div className="flex gap-2 sm:flex-1 sm:max-w-70">
-          <select className="flex-2 border rounded-md text-sm sm:text-lg">
+          <select
+            value={selectValue}
+            onChange={(e) => setSelectValue(e.target.value)}
+            className="flex-2 border rounded-md text-sm sm:text-lg"
+          >
             <option value="title">Title</option>
             <option value="author">Author</option>
             <option value="copies">Copies</option>
           </select>
 
           <div className="flex-1">
-            <button className="bg-pink-300 rounded-md py-1 px-2 text-sm cursor-pointer hover:bg-pink-200 sm:text-lg">
+            <button
+              onClick={handleSortBook}
+              className="bg-pink-300 rounded-md py-1 px-2 text-sm cursor-pointer hover:bg-pink-200 sm:text-lg"
+            >
               Sort
             </button>
           </div>
@@ -46,7 +60,7 @@ const Book = () => {
         </div>
       </div>
 
-      <Table books={books} onEdit={onEdit} onDelete={handleDeleteBook} />
+      <Table books={displayBooks} onEdit={onEdit} onDelete={handleDeleteBook} />
     </div>
   );
 };
