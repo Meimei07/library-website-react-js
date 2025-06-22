@@ -1,8 +1,8 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { NavLink, Outlet } from "react-router-dom";
 
 const RootLayout = () => {
-  const initBooks = [
+  const initBooks = JSON.parse(localStorage.getItem("books")) || [
     {
       id: 1,
       title: "Descandent of the Sun",
@@ -16,6 +16,10 @@ const RootLayout = () => {
 
   const [books, setBooks] = useState(initBooks);
   const [editBook, setEditBook] = useState(null);
+
+  useEffect(() => {
+    localStorage.setItem("books", JSON.stringify(books));
+  }, [books]);
 
   function handleAddBook(book) {
     book.copies = parseInt(book.copies);
