@@ -3,7 +3,7 @@ import Table from "./Table";
 import { Link, useOutletContext } from "react-router-dom";
 
 const Book = () => {
-  const { books, onEdit } = useOutletContext();
+  const { books, onEdit, handleDeleteBook } = useOutletContext();
 
   return (
     <div className="px-2 sm:px-5">
@@ -46,7 +46,7 @@ const Book = () => {
         </div>
       </div>
 
-      <Table books={books} onEdit={onEdit} />
+      <Table books={books} onEdit={onEdit} onDelete={handleDeleteBook} />
     </div>
   );
 };

@@ -25,6 +25,12 @@ const RootLayout = () => {
     console.log(book);
   }
 
+  function handleDeleteBook(id) {
+    const matchingBook = books.find((book) => book.id === id);
+    if (!matchingBook) return;
+    setBooks(books.filter((book) => book.id !== id));
+  }
+
   function onEdit(id) {
     const matchingBook = books.find((book) => book.id === id);
     setEditBook(matchingBook);
@@ -62,6 +68,7 @@ const RootLayout = () => {
           editBook,
           setEditBook,
           handleEditBook,
+          handleDeleteBook,
         }}
       />
     </div>
