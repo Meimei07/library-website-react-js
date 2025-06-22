@@ -1,8 +1,9 @@
 import React from "react";
-import { NavLink, useOutletContext, useNavigate } from "react-router-dom";
+import { useOutletContext, useNavigate, Link } from "react-router-dom";
 
 const Form = () => {
-  const { handleAddBook } = useOutletContext();
+  const { handleAddBook, editBook, setEditBook, handleEditBook } =
+    useOutletContext();
   const navigate = useNavigate();
 
   const onSubmit = (event) => {
@@ -11,7 +12,13 @@ const Form = () => {
     const formData = new FormData(event.target);
     const book = Object.fromEntries(formData.entries());
 
-    handleAddBook(book);
+    if (editBook) {
+      handleEditBook(book);
+      setEditBook(null);
+    } else {
+      handleAddBook(book);
+    }
+
     navigate("/book");
   };
 
@@ -27,6 +34,7 @@ const Form = () => {
             placeholder="Title..."
             className="border py-1 px-1.5 rounded-sm sm:text-lg sm:h-10 sm:px-3"
             name="title"
+            defaultValue={editBook?.title || ""}
             required
           />
         </label>
@@ -38,6 +46,7 @@ const Form = () => {
             placeholder="Author..."
             className="border py-1 px-1.5 rounded-sm sm:text-lg sm:h-10 sm:px-3"
             name="author"
+            defaultValue={editBook?.author || ""}
             required
           />
         </label>
@@ -49,6 +58,7 @@ const Form = () => {
             placeholder="Publisher..."
             className="border py-1 px-1.5 rounded-sm sm:text-lg sm:h-10 sm:px-3"
             name="publisher"
+            defaultValue={editBook?.publisher || ""}
             required
           />
         </label>
@@ -60,6 +70,7 @@ const Form = () => {
             placeholder="Publish Year..."
             className="border py-1 px-1.5 rounded-sm sm:text-lg sm:h-10 sm:px-3"
             name="publishYear"
+            defaultValue={editBook?.publishYear || ""}
             required
           />
         </label>
@@ -71,6 +82,7 @@ const Form = () => {
             placeholder="Pages..."
             className="border py-1 px-1.5 rounded-sm sm:text-lg sm:h-10 sm:px-3"
             name="pages"
+            defaultValue={editBook?.pages || ""}
             required
           />
         </label>
@@ -82,6 +94,7 @@ const Form = () => {
             placeholder="Copies..."
             className="border py-1 px-1.5 rounded-sm sm:text-lg sm:h-10 sm:px-3"
             name="copies"
+            defaultValue={editBook?.copies || ""}
             required
           />
         </label>
@@ -94,12 +107,13 @@ const Form = () => {
             Save
           </button>
 
-          <NavLink
+          <Link
             to="../book"
+            onClick={() => setEditBook(null)}
             className="border rounded-md py-1 px-2 text-sm cursor-pointer hover:bg-gray-100 sm:text-lg"
           >
             Back
-          </NavLink>
+          </Link>
         </div>
       </form>
     </div>

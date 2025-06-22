@@ -15,6 +15,7 @@ const RootLayout = () => {
   ];
 
   const [books, setBooks] = useState(initBooks);
+  const [editBook, setEditBook] = useState(null);
 
   function handleAddBook(book) {
     book.copies = parseInt(book.copies);
@@ -22,6 +23,21 @@ const RootLayout = () => {
 
     setBooks([...books, book]);
     console.log(book);
+  }
+
+  function onEdit(id) {
+    const matchingBook = books.find((book) => book.id === id);
+    setEditBook(matchingBook);
+    console.log(matchingBook);
+  }
+
+  function handleEditBook(book) {
+    book.copies = parseInt(book.copies);
+
+    setBooks(
+      books.map((b) => (b.id === editBook.id ? { ...b, ...book, id: b.id } : b))
+    );
+    console.log("update");
   }
 
   return (
@@ -38,7 +54,16 @@ const RootLayout = () => {
         <NavLink to="statistic">Statistic</NavLink>
       </ul>
 
-      <Outlet context={{ handleAddBook, books }} />
+      <Outlet
+        context={{
+          books,
+          handleAddBook,
+          onEdit,
+          editBook,
+          setEditBook,
+          handleEditBook,
+        }}
+      />
     </div>
   );
 };

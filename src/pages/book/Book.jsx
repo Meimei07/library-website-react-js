@@ -1,9 +1,9 @@
 import React from "react";
 import Table from "./Table";
-import { NavLink, useOutletContext } from "react-router-dom";
+import { Link, useOutletContext } from "react-router-dom";
 
 const Book = () => {
-  const { books } = useOutletContext();
+  const { books, onEdit } = useOutletContext();
 
   return (
     <div className="px-2 sm:px-5">
@@ -13,12 +13,12 @@ const Book = () => {
         </div>
 
         <div>
-          <NavLink
+          <Link
             to="form"
             className="bg-pink-300 rounded-md py-1 px-2 text-sm cursor-pointer hover:bg-pink-200 sm:text-lg"
           >
             Add book
-          </NavLink>
+          </Link>
         </div>
       </div>
 
@@ -46,7 +46,7 @@ const Book = () => {
         </div>
       </div>
 
-      <Table books={books} />
+      <Table books={books} onEdit={onEdit} />
     </div>
   );
 };
