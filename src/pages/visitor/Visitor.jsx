@@ -43,6 +43,8 @@ const Visitor = () => {
           />
         </div>
       </div>
+
+      <Table visitors={visitors} />
     </div>
   );
 };

@@ -2,6 +2,7 @@ import { useEffect, useState } from "react";
 import { NavLink, Outlet } from "react-router-dom";
 
 const RootLayout = () => {
+  // books
   const initBooks = JSON.parse(localStorage.getItem("books")) || [
     {
       id: 1,
@@ -84,6 +85,36 @@ const RootLayout = () => {
       )
     );
   }, [searchValue]);
+  // books
+
+  // visitors
+  const initVisitors = JSON.parse(localStorage.getItem("visitors")) || [
+    {
+      id: 1,
+      name: "Aurora",
+      phone: "092384091",
+    },
+    {
+      id: 2,
+      name: "John",
+      phone: "073247912",
+    },
+  ];
+
+  const [visitors, setVisitors] = useState(initVisitors);
+  const [displayVisitors, setDisplayVisitors] = useState(visitors);
+
+  useEffect(() => {
+    localStorage.setItem("visitors", JSON.stringify(visitors));
+    setDisplayVisitors(visitors);
+  }, [visitors]);
+
+  function handleAddVisitor(visitor) {
+    visitor.id = Math.floor(Math.random() * 10001);
+
+    setVisitors([...visitors, visitor]);
+    console.log(visitor);
+  }
 
   return (
     <div className="root-layout">
@@ -113,6 +144,9 @@ const RootLayout = () => {
           setSelectValue,
           searchValue,
           setSearchValue,
+
+          visitors,
+          handleAddVisitor,
         }}
       />
     </div>
