@@ -1,4 +1,6 @@
-const Table = ({ visitors }) => {
+import { Link } from "react-router-dom";
+
+const Table = ({ visitors, onEdit }) => {
   return (
     <div className="overflow-x-auto mt-4">
       <table className="min-w-full text-md">
@@ -18,7 +20,15 @@ const Table = ({ visitors }) => {
                 <td>{visitor.id}</td>
                 <td>{visitor.name}</td>
                 <td>{visitor.phone}</td>
-                <td>Edit</td>
+                <td>
+                  <Link
+                    to="form"
+                    onClick={() => onEdit(visitor.id)}
+                    className="text-blue-500 mr-1 cursor-pointer hover:underline"
+                  >
+                    Edit
+                  </Link>
+                </td>
               </tr>
             );
           })}

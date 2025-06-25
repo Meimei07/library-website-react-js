@@ -2,7 +2,8 @@ import React from "react";
 import { Link, useOutletContext, useNavigate } from "react-router-dom";
 
 const Form = () => {
-  const { handleAddVisitor } = useOutletContext();
+  const { handleAddVisitor, editVisitor, setEditVisitor, handleEditVisitor } =
+    useOutletContext();
   const navigate = useNavigate();
 
   const onSubmit = (event) => {
@@ -11,7 +12,13 @@ const Form = () => {
     const formData = new FormData(event.target);
     const visitor = Object.fromEntries(formData.entries());
 
-    handleAddVisitor(visitor);
+    if (editVisitor) {
+      handleEditVisitor(visitor);
+      setEditVisitor(null);
+    } else {
+      handleAddVisitor(visitor);
+    }
+
     navigate("/visitor");
   };
 
@@ -27,6 +34,7 @@ const Form = () => {
             placeholder="Name..."
             className="border py-1 px-1.5 rounded-sm sm:text-lg sm:h-10 sm:px-3"
             name="name"
+            defaultValue={editVisitor?.name || ""}
             required
           />
         </label>
@@ -38,6 +46,7 @@ const Form = () => {
             placeholder="Phone..."
             className="border py-1 px-1.5 rounded-sm sm:text-lg sm:h-10 sm:px-3"
             name="phone"
+            defaultValue={editVisitor?.phone || ""}
             required
           />
         </label>
@@ -52,6 +61,7 @@ const Form = () => {
 
           <Link
             to="../visitor"
+            onClick={() => setEditVisitor(null)}
             className="border rounded-md py-1 px-2 text-sm cursor-pointer hover:bg-gray-100 sm:text-lg"
           >
             Back

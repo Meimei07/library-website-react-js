@@ -103,6 +103,7 @@ const RootLayout = () => {
 
   const [visitors, setVisitors] = useState(initVisitors);
   const [displayVisitors, setDisplayVisitors] = useState(visitors);
+  const [editVisitor, setEditVisitor] = useState(null);
 
   useEffect(() => {
     localStorage.setItem("visitors", JSON.stringify(visitors));
@@ -114,6 +115,21 @@ const RootLayout = () => {
 
     setVisitors([...visitors, visitor]);
     console.log(visitor);
+  }
+
+  function onEdit(id) {
+    const matchingVisitor = visitors.find((visitor) => visitor.id === id);
+    if (!matchingVisitor) return;
+    setEditVisitor(matchingVisitor);
+  }
+
+  function handleEditVisitor(visitor) {
+    setVisitors(
+      visitors.map((v) =>
+        v.id === editVisitor.id ? { ...v, ...visitor, id: v.id } : v
+      )
+    );
+    console.log("update");
   }
 
   return (
@@ -147,6 +163,10 @@ const RootLayout = () => {
 
           visitors,
           handleAddVisitor,
+          onEdit,
+          editVisitor,
+          setEditVisitor,
+          handleEditVisitor,
         }}
       />
     </div>

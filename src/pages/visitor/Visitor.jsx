@@ -2,7 +2,7 @@ import { Link, useOutletContext } from "react-router-dom";
 import Table from "./Table";
 
 const Visitor = () => {
-  const { visitors } = useOutletContext();
+  const { visitors, onEdit } = useOutletContext();
 
   return (
     <div className="px-2 sm:px-5">
@@ -44,7 +44,7 @@ const Visitor = () => {
         </div>
       </div>
 
-      <Table visitors={visitors} />
+      <Table visitors={visitors} onEdit={onEdit} />
     </div>
   );
 };
