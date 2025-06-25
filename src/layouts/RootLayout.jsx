@@ -18,6 +18,7 @@ const RootLayout = () => {
   const [displayBooks, setDisplayBooks] = useState(books);
   const [editBook, setEditBook] = useState(null);
   const [selectValue, setSelectValue] = useState("title");
+  const [searchValue, setSearchValue] = useState("");
 
   useEffect(() => {
     localStorage.setItem("books", JSON.stringify(books));
@@ -73,6 +74,17 @@ const RootLayout = () => {
     setDisplayBooks(sortedBooks);
   }
 
+  useEffect(() => {
+    setDisplayBooks(
+      books.filter(
+        (b) =>
+          b.title.toLowerCase().includes(searchValue.toLowerCase()) ||
+          b.author.toLowerCase().includes(searchValue.toLowerCase()) ||
+          b.publisher.toLowerCase().includes(searchValue.toLowerCase())
+      )
+    );
+  }, [searchValue]);
+
   return (
     <div className="root-layout">
       <div className="text-pink-300 font-semibold tracking-widest text-3xl pl-3 mb-3 sm:text-4xl`">
@@ -99,6 +111,8 @@ const RootLayout = () => {
           handleSortBook,
           selectValue,
           setSelectValue,
+          searchValue,
+          setSearchValue,
         }}
       />
     </div>

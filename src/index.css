@@ -17,8 +17,8 @@ table {
     }
   }
 
-  tbody:hover {
-    background-color: rgb(247, 245, 245);
+  tbody > tr:hover {
+    background-color: rgba(252, 250, 250, 0.913);
   }
 }
 /* table */

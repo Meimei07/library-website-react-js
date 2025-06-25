@@ -10,6 +10,8 @@ const Book = () => {
     handleSortBook,
     selectValue,
     setSelectValue,
+    searchValue,
+    setSearchValue,
   } = useOutletContext();
 
   return (
@@ -56,6 +58,10 @@ const Book = () => {
             type="search"
             placeholder="search..."
             className="text-sm border rounded-md px-2 h-7.5 w-full sm:text-lg sm:h-8"
+            defaultValue={searchValue}
+            onChange={(e) => {
+              setSearchValue(e.target.value);
+            }}
           />
         </div>
       </div>
