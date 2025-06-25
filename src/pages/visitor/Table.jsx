@@ -1,6 +1,6 @@
 import { Link } from "react-router-dom";
 
-const Table = ({ visitors, onEdit }) => {
+const Table = ({ visitors, onEdit, onDelete }) => {
   return (
     <div className="overflow-x-auto mt-4">
       <table className="min-w-full text-md">
@@ -28,6 +28,13 @@ const Table = ({ visitors, onEdit }) => {
                   >
                     Edit
                   </Link>
+
+                  <button
+                    onClick={() => onDelete(visitor.id)}
+                    className="text-red-500 cursor-pointer hover:underline"
+                  >
+                    Delete
+                  </button>
                 </td>
               </tr>
             );

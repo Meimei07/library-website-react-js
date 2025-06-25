@@ -132,6 +132,12 @@ const RootLayout = () => {
     console.log("update");
   }
 
+  function handleDeleteVisitor(id) {
+    const matchingVisitor = visitors.find((visitor) => visitor.id === id);
+    if (!matchingVisitor) return;
+    setVisitors(visitors.filter((visitor) => visitor.id !== id));
+  }
+
   return (
     <div className="root-layout">
       <div className="text-pink-300 font-semibold tracking-widest text-3xl pl-3 mb-3 sm:text-4xl`">
@@ -167,6 +173,7 @@ const RootLayout = () => {
           editVisitor,
           setEditVisitor,
           handleEditVisitor,
+          handleDeleteVisitor,
         }}
       />
     </div>
