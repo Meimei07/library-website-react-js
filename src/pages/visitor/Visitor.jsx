@@ -9,6 +9,8 @@ const Visitor = () => {
     handleSortVisitor,
     visitorSelectValue,
     setVisitorSelectValue,
+    visitorSearchValue,
+    setVisitorSearchValue,
   } = useOutletContext();
 
   return (
@@ -57,6 +59,11 @@ const Visitor = () => {
             type="search"
             placeholder="search..."
             className="text-sm border rounded-md px-2 h-7.5 w-full sm:text-lg sm:h-8"
+            onChange={(e) => {
+              setVisitorSearchValue(e.target.value);
+              console.log(e.target.value);
+            }}
+            defaultValue={visitorSearchValue}
           />
         </div>
       </div>
