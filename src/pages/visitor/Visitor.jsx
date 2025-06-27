@@ -2,7 +2,14 @@ import { Link, useOutletContext } from "react-router-dom";
 import Table from "./Table";
 
 const Visitor = () => {
-  const { visitors, onEdit, handleDeleteVisitor } = useOutletContext();
+  const {
+    displayVisitors,
+    onEdit,
+    handleDeleteVisitor,
+    handleSortVisitor,
+    visitorSelectValue,
+    setVisitorSelectValue,
+  } = useOutletContext();
 
   return (
     <div className="px-2 sm:px-5">
@@ -23,13 +30,23 @@ const Visitor = () => {
 
       <div className="flex flex-col my-4 max-w-70 sm:flex-row sm:max-w-full sm:items-center sm:justify-between">
         <div className="flex gap-2 sm:flex-1 sm:max-w-70">
-          <select className="flex-2 border rounded-md text-sm sm:text-lg">
+          <select
+            defaultValue={visitorSelectValue}
+            onChange={(e) => {
+              setVisitorSelectValue(e.target.value);
+              console.log(e.target.value);
+            }}
+            className="flex-2 border rounded-md text-sm sm:text-lg"
+          >
             <option value="id">Id</option>
             <option value="name">Name</option>
           </select>
 
           <div className="flex-1">
-            <button className="bg-pink-300 rounded-md py-1 px-2 text-sm cursor-pointer hover:bg-pink-200 sm:text-lg">
+            <button
+              onClick={handleSortVisitor}
+              className="bg-pink-300 rounded-md py-1 px-2 text-sm cursor-pointer hover:bg-pink-200 sm:text-lg"
+            >
               Sort
             </button>
           </div>
@@ -45,7 +62,7 @@ const Visitor = () => {
       </div>
 
       <Table
-        visitors={visitors}
+        visitors={displayVisitors}
         onEdit={onEdit}
         onDelete={handleDeleteVisitor}
       />

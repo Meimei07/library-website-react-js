@@ -104,6 +104,7 @@ const RootLayout = () => {
   const [visitors, setVisitors] = useState(initVisitors);
   const [displayVisitors, setDisplayVisitors] = useState(visitors);
   const [editVisitor, setEditVisitor] = useState(null);
+  const [visitorSelectValue, setVisitorSelectValue] = useState("id");
 
   useEffect(() => {
     localStorage.setItem("visitors", JSON.stringify(visitors));
@@ -138,6 +139,24 @@ const RootLayout = () => {
     setVisitors(visitors.filter((visitor) => visitor.id !== id));
   }
 
+  function handleSortVisitor() {
+    let sortedVisitors = [...displayVisitors];
+
+    switch (visitorSelectValue) {
+      case "id":
+        sortedVisitors.sort((a, b) => a.id - b.id);
+        break;
+      case "name":
+        sortedVisitors.sort((a, b) => a.name.localeCompare(b.name));
+        break;
+      default:
+        break;
+    }
+
+    setDisplayVisitors(sortedVisitors);
+    console.log("sort");
+  }
+
   return (
     <div className="root-layout">
       <div className="text-pink-300 font-semibold tracking-widest text-3xl pl-3 mb-3 sm:text-4xl`">
@@ -167,13 +186,16 @@ const RootLayout = () => {
           searchValue,
           setSearchValue,
 
-          visitors,
+          displayVisitors,
           handleAddVisitor,
           onEdit,
           editVisitor,
           setEditVisitor,
           handleEditVisitor,
           handleDeleteVisitor,
+          handleSortVisitor,
+          visitorSelectValue,
+          setVisitorSelectValue,
         }}
       />
     </div>
