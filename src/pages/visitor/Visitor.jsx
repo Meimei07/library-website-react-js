@@ -4,7 +4,7 @@ import Table from "./Table";
 const Visitor = () => {
   const {
     displayVisitors,
-    onEdit,
+    onEditVisitor,
     handleDeleteVisitor,
     handleSortVisitor,
     visitorSelectValue,
@@ -70,7 +70,7 @@ const Visitor = () => {
 
       <Table
         visitors={displayVisitors}
-        onEdit={onEdit}
+        onEdit={onEditVisitor}
         onDelete={handleDeleteVisitor}
       />
     </div>

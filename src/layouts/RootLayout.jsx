@@ -18,8 +18,8 @@ const RootLayout = () => {
   const [books, setBooks] = useState(initBooks);
   const [displayBooks, setDisplayBooks] = useState(books);
   const [editBook, setEditBook] = useState(null);
-  const [selectValue, setSelectValue] = useState("title");
-  const [searchValue, setSearchValue] = useState("");
+  const [bookSelectValue, setBookSelectValue] = useState("title");
+  const [bookSearchValue, setBookSearchValue] = useState("");
 
   useEffect(() => {
     localStorage.setItem("books", JSON.stringify(books));
@@ -40,7 +40,7 @@ const RootLayout = () => {
     setBooks(books.filter((book) => book.id !== id));
   }
 
-  function onEdit(id) {
+  function onEditBook(id) {
     const matchingBook = books.find((book) => book.id === id);
     setEditBook(matchingBook);
     console.log(matchingBook);
@@ -58,7 +58,7 @@ const RootLayout = () => {
   function handleSortBook() {
     let sortedBooks = [...displayBooks];
 
-    switch (selectValue) {
+    switch (bookSelectValue) {
       case "title":
         sortedBooks.sort((a, b) => a.title.localeCompare(b.title));
         break;
@@ -79,12 +79,12 @@ const RootLayout = () => {
     setDisplayBooks(
       books.filter(
         (b) =>
-          b.title.toLowerCase().includes(searchValue.toLowerCase()) ||
-          b.author.toLowerCase().includes(searchValue.toLowerCase()) ||
-          b.publisher.toLowerCase().includes(searchValue.toLowerCase())
+          b.title.toLowerCase().includes(bookSearchValue.toLowerCase()) ||
+          b.author.toLowerCase().includes(bookSearchValue.toLowerCase()) ||
+          b.publisher.toLowerCase().includes(bookSearchValue.toLowerCase())
       )
     );
-  }, [searchValue]);
+  }, [bookSearchValue]);
   // books
 
   // visitors
@@ -119,7 +119,7 @@ const RootLayout = () => {
     console.log(visitor);
   }
 
-  function onEdit(id) {
+  function onEditVisitor(id) {
     const matchingVisitor = visitors.find((visitor) => visitor.id === id);
     if (!matchingVisitor) return;
     setEditVisitor(matchingVisitor);
@@ -184,20 +184,20 @@ const RootLayout = () => {
         context={{
           displayBooks,
           handleAddBook,
-          onEdit,
+          onEditBook,
           editBook,
           setEditBook,
           handleEditBook,
           handleDeleteBook,
           handleSortBook,
-          selectValue,
-          setSelectValue,
-          searchValue,
-          setSearchValue,
+          bookSelectValue,
+          setBookSelectValue,
+          bookSearchValue,
+          setBookSearchValue,
 
           displayVisitors,
           handleAddVisitor,
-          onEdit,
+          onEditVisitor,
           editVisitor,
           setEditVisitor,
           handleEditVisitor,

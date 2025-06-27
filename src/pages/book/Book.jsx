@@ -5,13 +5,13 @@ import { Link, useOutletContext } from "react-router-dom";
 const Book = () => {
   const {
     displayBooks,
-    onEdit,
+    onEditBook,
     handleDeleteBook,
     handleSortBook,
-    selectValue,
-    setSelectValue,
-    searchValue,
-    setSearchValue,
+    bookSelectValue,
+    setBookSelectValue,
+    bookSearchValue,
+    setBookSearchValue,
   } = useOutletContext();
 
   return (
@@ -34,8 +34,8 @@ const Book = () => {
       <div className="flex flex-col my-4 max-w-70 sm:flex-row sm:max-w-full sm:items-center sm:justify-between">
         <div className="flex gap-2 sm:flex-1 sm:max-w-70">
           <select
-            value={selectValue}
-            onChange={(e) => setSelectValue(e.target.value)}
+            value={bookSelectValue}
+            onChange={(e) => setBookSelectValue(e.target.value)}
             className="flex-2 border rounded-md text-sm sm:text-lg"
           >
             <option value="title">Title</option>
@@ -58,15 +58,19 @@ const Book = () => {
             type="search"
             placeholder="search..."
             className="text-sm border rounded-md px-2 h-7.5 w-full sm:text-lg sm:h-8"
-            defaultValue={searchValue}
+            defaultValue={bookSearchValue}
             onChange={(e) => {
-              setSearchValue(e.target.value);
+              setBookSearchValue(e.target.value);
             }}
           />
         </div>
       </div>
 
-      <Table books={displayBooks} onEdit={onEdit} onDelete={handleDeleteBook} />
+      <Table
+        books={displayBooks}
+        onEdit={onEditBook}
+        onDelete={handleDeleteBook}
+      />
     </div>
   );
 };
